@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     // game objects
     [SerializeField]
+    private Text HighScoreText;
+    [SerializeField]
     private Text welcomeText;
     [SerializeField] 
     private Text scoreText;
@@ -13,6 +15,8 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverMenu;
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private Button RestartButton;
     [SerializeField]
     private Button mainMenuButton;
     private GameObject player;
@@ -27,9 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Awake ()
     {
-        mainMenuButton.onClick.AddListener(MainMenu);
         score = 0;
-        mainMenuButton.onClick.AddListener(MainMenu);
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -43,7 +45,11 @@ public class GameManager : MonoBehaviour
         spawnManager = GameObject.Find("SpwanManager");
         player.SetActive(false);
         gameOverMenu.SetActive(false);
+        mainMenuButton.onClick.AddListener(MainMenu);
+        RestartButton.onClick.AddListener(Restart);
         mainMenuButton.gameObject.SetActive(false);
+        RestartButton.gameObject.SetActive(false);
+        
     }
 
     void Start()
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         mainMenuButton.gameObject.SetActive(true);
+        RestartButton.gameObject.SetActive(true);
         player.SetActive(false);
         spawnManager.GetComponent<SpwanManager>().StopSpawning();
         gameOverMenu.SetActive(true);
@@ -114,9 +121,20 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WelcomePlayer(string name)
     {
+        int highScore = MainManager.Instance.LoadScore();
+        if (highScore > 0)
+        {
+            string hname = MainManager.Instance.GetName();
+            HighScoreText.text = "Highest Score " + hname + " " + highScore;
+        }
         welcomeText.text = "Welcome " + name + " And Good Luck";
         welcomeText.enabled = true;
         yield return new WaitForSeconds(3);
         welcomeText.enabled = false;
+    }
+    
+    private void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
