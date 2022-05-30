@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     // Game Objects
     [SerializeField]
+    private ParticleSystem explosion;
+    [SerializeField]
     private Gun gun;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // shoot a projectile
-            
             gun.Shoot();
         }
         if (hp < 1)
@@ -83,6 +84,9 @@ public class PlayerController : MonoBehaviour
         // if the player hits an enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            ParticleSystem explosionRef = Instantiate(explosion, transform.position, explosion.transform.rotation);
+            explosionRef.Play();
+            Destroy(explosionRef, 2f);
             Debug.Log("Crashed on an enemy");
             GameManager.Instance.GameOver();
             // game over

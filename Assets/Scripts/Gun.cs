@@ -4,6 +4,8 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField]
+    private ParticleSystem explosion;
+    [SerializeField]
     private TrailRenderer bulletTrail;
     [SerializeField]
     private Transform bulletSpawnPoint;
@@ -26,6 +28,9 @@ public class Gun : MonoBehaviour
             TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
             if (hit.collider.CompareTag("Enemy"))
             {
+                ParticleSystem explosionRef = Instantiate(explosion, hit.point, explosion.transform.rotation);
+                explosionRef.Play();
+                Destroy(explosionRef, 2f);
                 Destroy(hit.collider.gameObject, trail.time);
                 GameManager.Instance.IncrementScore();
             }

@@ -1403,6 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14e9fe899bb25743aabbad5787f1358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 4040910646806774952, guid: 3cd5cbb242cf01949b2d851dfad05cd2, type: 3}
   bulletTrail: {fileID: 4710188903427130152, guid: 4b3ab93fcc8e43040ba299d9c20152f3, type: 3}
   bulletSpawnPoint: {fileID: 1932631078}
   bulletHitEffect: {fileID: 0}
@@ -1430,6 +1431,10 @@ PrefabInstance:
       propertyPath: xlimit
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3126391278437448677, guid: e60a9413c9331af45b18b62c556b0d1f, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 4040910646806774952, guid: 3cd5cbb242cf01949b2d851dfad05cd2, type: 3}
     - target: {fileID: 3236281843312334882, guid: e60a9413c9331af45b18b62c556b0d1f, type: 3}
       propertyPath: m_RootOrder
       value: 4
