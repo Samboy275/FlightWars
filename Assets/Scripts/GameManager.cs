@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WelcomePlayer(string name)
     {
-        welcomeText.text = "Welcome " + name + " And Good Luck";
+        welcomeText.text = "Welcome " + name + " And Good Luck" + "\nUSE W,S,A,D to move and Space to shoot";
         welcomeText.enabled = true;
         yield return new WaitForSeconds(3);
         welcomeText.enabled = false;
