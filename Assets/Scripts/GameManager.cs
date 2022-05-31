@@ -57,6 +57,13 @@ public class GameManager : MonoBehaviour
         spawnManager.GetComponent<SpwanManager>().StartSpawning();
         player.SetActive(true);
         StartCoroutine(WelcomePlayer(MainManager.Instance.GetName()));
+        int highScore = MainManager.Instance.LoadScore();
+        Debug.Log("this is highscore " + highScore);
+        if (highScore > 0)
+        {
+            string hname = MainManager.Instance.GetName();
+            HighScoreText.text = "Highest Score " + hname + " " + highScore;
+        }
     }
     void Update ()
     {
@@ -121,12 +128,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WelcomePlayer(string name)
     {
-        int highScore = MainManager.Instance.LoadScore();
-        if (highScore > 0)
-        {
-            string hname = MainManager.Instance.GetName();
-            HighScoreText.text = "Highest Score " + hname + " " + highScore;
-        }
         welcomeText.text = "Welcome " + name + " And Good Luck";
         welcomeText.enabled = true;
         yield return new WaitForSeconds(3);

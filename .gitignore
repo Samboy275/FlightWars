@@ -37,3 +37,7 @@ sysinfo.txt
 *.unitypackage
 WebGL Builds/*
 connectwebgl.zip
+
+#tests
+Assets/Scripts/3D Controls/*
+Assets/Scenes/3dTest/*
